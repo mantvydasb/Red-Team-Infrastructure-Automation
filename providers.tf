@@ -1,8 +1,8 @@
 provider "digitalocean" {
-    token = "${var.DigitalOceanToken}"
+    token = "${var.do-token}"
 }
 
 provider "cloudflare" {
-    email = "${var.CloudFlareEmail}"
-    token = "${var.CloudFlareToken}"
+    email = "${var.cf-email}"
+    token = "${var.cf-token}"
 }
