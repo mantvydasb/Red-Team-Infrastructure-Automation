@@ -6,19 +6,19 @@ resource "digitalocean_droplet" "c2-http-rdr" {
   size   = "s-1vcpu-1gb"
   ssh_keys = ["${digitalocean_ssh_key.dossh.id}"]
 
-  provisioner "remote-exec" {
-    inline = [
-        # environment
-        "apt update",
-        "apt-get -y install socat",
-        "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:80\" >> /etc/cron.d/mdadm",
-        "echo \"@reboot root socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:443\" >> /etc/cron.d/mdadm",
+  # provisioner "remote-exec" {
+  #   inline = [
+  #       # environment
+  #       "apt update",
+  #       "apt-get -y install socat",
+  #       "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:80\" >> /etc/cron.d/mdadm",
+  #       "echo \"@reboot root socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:443\" >> /etc/cron.d/mdadm",
         
-        # http/s traffic redirectors
-        "socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:80 &",
-        "socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:443 &",
-        "shutdown -r"
-    ]
-  }
+  #       # http/s traffic redirectors
+  #       "socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:80 &",
+  #       "socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:443 &",
+  #       "shutdown -r"
+  #   ]
+  # }
 
 }

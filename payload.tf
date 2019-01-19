@@ -6,15 +6,17 @@ resource "digitalocean_droplet" "payload" {
   size   = "s-1vcpu-1gb"
   ssh_keys = ["${digitalocean_ssh_key.dossh.id}"]
 
-#   provisioner "remote-exec" {
-#     inline = [
-#         # environment
-#         "apt update",
-#         "apt-get -y install zip default-jre",
-#         "cd /opt; wget https://github.com/mantvydasb/Offensive-Security-OSCP-Cheatsheets/raw/master/lab/cs.zip -O cobaltstrike.zip",
-#         "echo \"@reboot root cd /opt/cobaltstrike/; ./teamserver ${digitalocean_droplet.c2-http.ipv4_address} ${var.cspw}\" >> /etc/cron.d/mdadm",
-#         "unzip -P ${var.cspw} cobaltstrike.zip && shutdown -r"
-#     ]
-#   }
+  provisioner "remote-exec" {
+    inline = [
+        # environment
+        "apt update",
+        "export DEBIAN_FRONTEND=noninteractive; apt-get -y install zip postfix",
+        "echo ${var.domain-phish-from} > /etc/mailname",
+        "sed -i 's/myhostname = ${digitalocean_droplet.payload.name}/myhostname = ${var.domain-phish-from}/' /etc/postfix/main.cf",
+        "sed -i 's/relayhost = /relayhost = ${var.domain-rdir}/' /etc/postfix/main.cf",
+        "cd /opt; wget https://github.com/gophish/gophish/releases/download/0.7.1/gophish-v0.7.1-linux-64bit.zip -O gophish.zip",
+        "unzip gophish.zip; chmod +x gophish"
+    ]
+  }
 
 }
