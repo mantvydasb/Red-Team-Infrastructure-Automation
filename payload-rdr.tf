@@ -14,17 +14,31 @@ resource "digitalocean_droplet" "payload-rdr" {
         "export DEBIAN_FRONTEND=noninteractive; apt-get -y install postfix",
         "echo ${var.domain-rdir} > /etc/mailname",
         "sed -i 's/myhostname = ${digitalocean_droplet.payload-rdr.name}/myhostname = ${var.domain-rdir}/' /etc/postfix/main.cf",
-        "sed -i 's/127.0.0.0\\/8/${digitalocean_droplet.payload.ipv4_address}/' /etc/postfix/main.cf"
-
-
-        # "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:80\" >> /etc/cron.d/mdadm",
-        # "echo \"@reboot root socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:443\" >> /etc/cron.d/mdadm",
+        "sed -i 's/127.0.0.0\\/8/${digitalocean_droplet.payload.ipv4_address}/' /etc/postfix/main.cf",
+        "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:80\" >> /etc/cron.d/mdadm",
+        "echo \"@reboot root socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:443\" >> /etc/cron.d/mdadm",
         
-        # # http/s traffic redirectors
+        # http/s traffic redirectors
         # "socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:80 &",
         # "socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.payload.ipv4_address}:443 &",
-        # "shutdown -r"
     ]
   }
 
+  provisioner "file" {
+    source = "header_checks"
+    destination = "/etc/postfix/header_checks"
+  }
+
+  provisioner "file" {
+    source = "master.cf"
+    destination = "/etc/postfix/master.cf"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "postmap /etc/postfix/header_checks",
+      "postfix reload",
+      "shutdown -r"
+    ]
+  }
 }
