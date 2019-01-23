@@ -78,7 +78,7 @@ resource "digitalocean_record" "payload-rdr-mail-spf" {
 resource "digitalocean_record" "payload-rdr-mail-dkim" {
     domain = "${var.domain-rdir}"
     name   = "mail._domainkey"
-    value  = "changeme from /etc/opendkim/keys/dkim.txt"
+    value  = "changeme from /root/dkim.txt"
     type   = "TXT"
     ttl    = 1
 }
