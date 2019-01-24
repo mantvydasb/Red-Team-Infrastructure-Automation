@@ -1,3 +1,0 @@
-mail._domainkey	IN	TXT	( "v=DKIM1; h=sha256; k=rsa; t=y; "
-	  "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7gCoxh+6Wul3uO/x1BPb6bEBTaRRZlipZ+/XQYIxTTY7mksljtBb0A3w/paTFMdncsxZQ3WxJS6G8hvy+Y6jqCLph4dR5VOw4ZCNCCc20L6o/mQzJKzyNcD37AegXBZpF+0XUl1gfBG0qadMV8/C1StTttV6rftVs7Xwyvpwk1Wlf1789oyDJxQtgB9OhvlJe2hdgtDOsJL10m"
-	  "q6F2Y5uFBPL1H53i/hs+s8OhgRMVlScnltO2g7NRTBC9DQcmNRdGMVVxe9xBEBri8nfA5GvxewcRArvQdw7/97467C8tn7X950J9NTDpm2D4lDolE5S9V9fjy1tl2fXe7DL4giOQIDAQAB" )  ; ----- DKIM key mail for redteam.me

@@ -1,38 +1,42 @@
 # # DNS configuration
 
-# # c2 http redirector
+# c2 redirector A #1
 # resource "cloudflare_record" "c2-http-rdr-a1" {
 #     domain = "${var.domain-rdir}"
 #     name   = "${var.sub1}"
 #     value  = "${digitalocean_droplet.c2-http-rdr.ipv4_address}"
 #     type   = "A"
-#     ttl    = 120
+#     ttl    = 6020
 # }
+# c2 redirector A #2
 # resource "cloudflare_record" "c2-http-rdr-a2" {
 #     domain = "${var.domain-rdir}"
 #     name   = "${var.sub2}"
 #     value  = "${digitalocean_droplet.c2-http-rdr.ipv4_address}"
 #     type   = "A"
-#     ttl    = 120
+#     ttl    = 6020
 # }
 
-# # c2 teamserver
+# c2 http A #2
 # resource "cloudflare_record" "c2-http-a1" {
 #     domain = "${var.domain-c2}"
 #     name   = "${var.sub3}"
 #     value  = "${digitalocean_droplet.c2-http.ipv4_address}"
 #     type   = "A"
-#     ttl    = 120
+#     ttl    = 6020
 # }
+# c2 http A #2
 # resource "cloudflare_record" "c2-http-a2" {
 #     domain = "${var.domain-c2}"
 #     name   = "${var.sub4}"
 #     value  = "${digitalocean_droplet.c2-http.ipv4_address}"
 #     type   = "A"
-#     ttl    = 120
+#     ttl    = 6020
 # }
 
-# payload redirector
+
+
+# payload redirector A #1
 resource "digitalocean_record" "payload-rdr-a0" {
     domain = "${var.domain-rdir}"
     name   = "@"
@@ -40,7 +44,7 @@ resource "digitalocean_record" "payload-rdr-a0" {
     type   = "A"
     ttl    = 60
 }
-
+# payload redirector A #3
 resource "digitalocean_record" "payload-rdr-a1" {
     domain = "${var.domain-rdir}"
     name   = "${var.sub6}"
@@ -49,7 +53,9 @@ resource "digitalocean_record" "payload-rdr-a1" {
     ttl    = 60
 }
 
-# mail records
+
+
+# mail relay A
 resource "digitalocean_record" "payload-rdr-mail-a1" {
     domain = "${var.domain-rdir}"
     name   = "mail"
@@ -57,6 +63,7 @@ resource "digitalocean_record" "payload-rdr-mail-a1" {
     type   = "A"
     ttl    = 60
 }
+# mail relay MX
 resource "digitalocean_record" "payload-rdr-mail-mx" {
     domain = "${var.domain-rdir}"
     name   = "@"
@@ -65,8 +72,7 @@ resource "digitalocean_record" "payload-rdr-mail-mx" {
     priority = 5
     ttl    = 60
 }
-
-# spf record for smtp relay
+# mail relay TXT SPF
 resource "digitalocean_record" "payload-rdr-mail-spf" {
     domain = "${var.domain-rdir}"
     name   = "@"
@@ -74,22 +80,24 @@ resource "digitalocean_record" "payload-rdr-mail-spf" {
     type   = "TXT"
     ttl    = 60
 }
-# dkim record for smtp relay
+# mail relay TXT DKIM placeholder
 resource "digitalocean_record" "payload-rdr-mail-dkim" {
     domain = "${var.domain-rdir}"
     name   = "mail._domainkey"
     value  = "changeme from /root/dkim.txt"
     type   = "TXT"
-    ttl    = 1
+    ttl    = 60
 }
-# dmarc record for smtp relay
+# mail relay TXT DMARC
 resource "digitalocean_record" "payload-rdr-mail-dmarc" {
     domain = "${var.domain-rdir}"
     name   = "_dmarc"
     value  = "v=DMARC1; p=reject"
     type   = "TXT"
-    ttl    = 1
+    ttl    = 60
 }
+
+
 
 # payload server
 resource "cloudflare_record" "payload-a1" {
@@ -97,5 +105,5 @@ resource "cloudflare_record" "payload-a1" {
     name   = "${var.sub6}"
     value  = "${digitalocean_droplet.payload.ipv4_address}"
     type   = "A"
-    ttl    = 120
+    ttl    = 60
 }

@@ -68,7 +68,7 @@ resource "digitalocean_droplet" "payload-rdr" {
     ]
   }
 
-  # provisioner "local-exec" {
-  #   command = "scp -o StrictHostKeyChecking=no ${digitalocean_droplet.payload.ipv4_address}:/etc/opendkim/keys/${var.domain-rdir}/* ."
-  # }
+  provisioner "local-exec" {
+    command = "sleep 3; scp -o StrictHostKeyChecking=no ${digitalocean_droplet.payload.ipv4_address}:/etc/opendkim/keys/${var.domain-rdir}/dkim.txt ."
+  }
 }
