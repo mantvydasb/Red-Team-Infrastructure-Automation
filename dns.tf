@@ -64,7 +64,7 @@ resource "digitalocean_record" "payload-rdr-mail-a1" {
     ttl    = 60
 }
 # mail relay MX
-resource "digitalocean_record" "Apayload-rdr-mail-mx" {
+resource "digitalocean_record" "payload-rdr-mail-mx" {
     domain = "${var.domain-rdir}"
     name   = "@"
     value  = "mail.${var.domain-rdir}."
