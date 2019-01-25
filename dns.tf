@@ -64,7 +64,7 @@ resource "digitalocean_record" "payload-rdr-mail-a1" {
     ttl    = 60
 }
 # mail relay MX
-resource "digitalocean_record" "payload-rdr-mail-mx" {
+resource "digitalocean_record" "Apayload-rdr-mail-mx" {
     domain = "${var.domain-rdir}"
     name   = "@"
     value  = "mail.${var.domain-rdir}."
@@ -105,5 +105,5 @@ resource "cloudflare_record" "payload-a1" {
     name   = "${var.sub6}"
     value  = "${digitalocean_droplet.payload.ipv4_address}"
     type   = "A"
-    ttl    = 60
+    ttl    = 120
 }
