@@ -4,8 +4,8 @@ resource "digitalocean_firewall" "c2-http" {
     droplet_ids = [
         # "${digitalocean_droplet.c2-http.id}", 
         # "${digitalocean_droplet.c2-http-rdr.id}",
-        "${digitalocean_droplet.payload.id}",
-        "${digitalocean_droplet.payload-rdr.id}"        
+        "${digitalocean_droplet.phishing.id}",
+        "${digitalocean_droplet.phishing-rdr.id}"        
         ]
 
     inbound_rule = [
@@ -49,7 +49,7 @@ resource "digitalocean_firewall" "operator" {
     name = "operator"
     droplet_ids = [
         # "${digitalocean_droplet.c2-http.id}", 
-        "${digitalocean_droplet.payload.id}"
+        "${digitalocean_droplet.phishing.id}"
         ]
 
     inbound_rule = [
@@ -64,7 +64,7 @@ resource "digitalocean_firewall" "operator" {
 
 resource "digitalocean_firewall" "gophish" {
     name = "gophish"
-    droplet_ids = ["${digitalocean_droplet.payload.id}"]
+    droplet_ids = ["${digitalocean_droplet.phishing.id}"]
 
     inbound_rule = [
         {
@@ -77,20 +77,20 @@ resource "digitalocean_firewall" "gophish" {
         {
             protocol = "tcp"
             port_range = "25"
-            destination_addresses = ["${digitalocean_droplet.payload-rdr.ipv4_address}"]
+            destination_addresses = ["${digitalocean_droplet.phishing-rdr.ipv4_address}"]
         }
     ]
 }
 
 resource "digitalocean_firewall" "stmp-relay" {
     name = "stmp-relay"
-    droplet_ids = ["${digitalocean_droplet.payload-rdr.id}"]
+    droplet_ids = ["${digitalocean_droplet.phishing-rdr.id}"]
 
     inbound_rule = [
         {
             protocol = "tcp"
             port_range = "25"
-            source_addresses = ["${digitalocean_droplet.payload.ipv4_address}"]
+            source_addresses = ["${digitalocean_droplet.phishing.ipv4_address}"]
         }
     ]
 
