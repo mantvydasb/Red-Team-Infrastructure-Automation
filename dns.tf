@@ -36,19 +36,19 @@
 
 
 
-# payload redirector A #1
-resource "digitalocean_record" "payload-rdr-a0" {
+# phishing redirector A #1
+resource "digitalocean_record" "phishing-rdr-a0" {
     domain = "${var.domain-rdir}"
     name   = "@"
-    value  = "${digitalocean_droplet.payload-rdr.ipv4_address}"
+    value  = "${digitalocean_droplet.phishing-rdr.ipv4_address}"
     type   = "A"
     ttl    = 60
 }
-# payload redirector A #3
-resource "digitalocean_record" "payload-rdr-a1" {
+# phishing redirector A #3
+resource "digitalocean_record" "phishing-rdr-a1" {
     domain = "${var.domain-rdir}"
     name   = "${var.sub6}"
-    value  = "${digitalocean_droplet.payload-rdr.ipv4_address}"
+    value  = "${digitalocean_droplet.phishing-rdr.ipv4_address}"
     type   = "A"
     ttl    = 60
 }
@@ -56,15 +56,15 @@ resource "digitalocean_record" "payload-rdr-a1" {
 
 
 # mail relay A
-resource "digitalocean_record" "payload-rdr-mail-a1" {
+resource "digitalocean_record" "phishing-rdr-mail-a1" {
     domain = "${var.domain-rdir}"
     name   = "mail"
-    value  = "${digitalocean_droplet.payload-rdr.ipv4_address}"
+    value  = "${digitalocean_droplet.phishing-rdr.ipv4_address}"
     type   = "A"
     ttl    = 60
 }
 # mail relay MX
-resource "digitalocean_record" "payload-rdr-mail-mx" {
+resource "digitalocean_record" "phishing-rdr-mail-mx" {
     domain = "${var.domain-rdir}"
     name   = "@"
     value  = "mail.${var.domain-rdir}."
@@ -73,15 +73,15 @@ resource "digitalocean_record" "payload-rdr-mail-mx" {
     ttl    = 60
 }
 # mail relay TXT SPF
-resource "digitalocean_record" "payload-rdr-mail-spf" {
+resource "digitalocean_record" "phishing-rdr-mail-spf" {
     domain = "${var.domain-rdir}"
     name   = "@"
-    value  = "v=spf1 ip4:${digitalocean_droplet.payload-rdr.ipv4_address} include:_spf.google.com ~all"
+    value  = "v=spf1 ip4:${digitalocean_droplet.phishing-rdr.ipv4_address} include:_spf.google.com ~all"
     type   = "TXT"
     ttl    = 60
 }
 # mail relay TXT DKIM placeholder
-resource "digitalocean_record" "payload-rdr-mail-dkim" {
+resource "digitalocean_record" "phishing-rdr-mail-dkim" {
     domain = "${var.domain-rdir}"
     name   = "mail._domainkey"
     value  = "changeme from /root/dkim.txt"
@@ -89,7 +89,7 @@ resource "digitalocean_record" "payload-rdr-mail-dkim" {
     ttl    = 60
 }
 # mail relay TXT DMARC
-resource "digitalocean_record" "payload-rdr-mail-dmarc" {
+resource "digitalocean_record" "phishing-rdr-mail-dmarc" {
     domain = "${var.domain-rdir}"
     name   = "_dmarc"
     value  = "v=DMARC1; p=reject"
@@ -99,11 +99,11 @@ resource "digitalocean_record" "payload-rdr-mail-dmarc" {
 
 
 
-# payload server
-resource "cloudflare_record" "payload-a1" {
+# phishing server
+resource "cloudflare_record" "phishing-a1" {
     domain = "${var.domain-c2}"
     name   = "${var.sub6}"
-    value  = "${digitalocean_droplet.payload.ipv4_address}"
+    value  = "${digitalocean_droplet.phishing.ipv4_address}"
     type   = "A"
     ttl    = 120
 }

@@ -1,7 +1,7 @@
-# create a payload droplet
-resource "digitalocean_droplet" "payload" {
+# create a phishing droplet
+resource "digitalocean_droplet" "phishing" {
   image  = "ubuntu-18-04-x64"
-  name   = "payload"
+  name   = "phishing"
   region = "nyc3"
   size   = "s-1vcpu-1gb"
   ssh_keys = ["${digitalocean_ssh_key.dossh.id}"]
