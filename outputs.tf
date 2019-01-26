@@ -1,5 +1,5 @@
 
-output "phishing-rdr" {
+output "outputs" {
   value = [
     "phishing ${cloudflare_record.phishing-a1.name}.${var.domain-c2} - ${digitalocean_droplet.phishing.ipv4_address}", 
     "phishing redirector ${digitalocean_record.phishing-rdr-a0.name}${var.domain-rdir} - ${digitalocean_droplet.phishing-rdr.ipv4_address}", 
