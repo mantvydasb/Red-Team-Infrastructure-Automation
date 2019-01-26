@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} "android|blackberry|googlebot-mobile|iemobile|ipad|$
+RewriteRule ^.*$ http://payloadURLForMobiles/login [P]
+RewriteRule ^.*$ http://payloadURLForOtherClients/%{REQUEST_URI} [P]
