@@ -20,7 +20,6 @@ resource "digitalocean_droplet" "payload-rdr" {
     source = "./configs/apache2.conf"
     destination = "/etc/apache2/apache2.conf"
   }
-
   provisioner "remote-exec" {
     inline = [
       "chmod 644 /var/www/html/.htaccess"

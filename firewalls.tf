@@ -2,8 +2,8 @@
 resource "digitalocean_firewall" "c2-http" {
     name = "c2-http"
     droplet_ids = [
-        # "${digitalocean_droplet.c2-http.id}", 
-        # "${digitalocean_droplet.c2-http-rdr.id}",
+        "${digitalocean_droplet.c2-http.id}", 
+        "${digitalocean_droplet.c2-http-rdr.id}",
         "${digitalocean_droplet.phishing.id}",
         "${digitalocean_droplet.phishing-rdr.id}"        
         ]
@@ -48,8 +48,7 @@ resource "digitalocean_firewall" "c2-http" {
 resource "digitalocean_firewall" "operator" {
     name = "operator"
     droplet_ids = [
-        # "${digitalocean_droplet.c2-http.id}", 
-        "${digitalocean_droplet.phishing.id}"
+        "${digitalocean_droplet.c2-http.id}" 
         ]
 
     inbound_rule = [
