@@ -1,8 +1,8 @@
 
 output "outputs" {
   value = [
-    "c2 a1 ${cloudflare_record.c2-http-a1.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http.ipv4_address}", 
-    "c2 a2 ${cloudflare_record.c2-http-a2.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http.ipv4_address}", 
+    "c2 htto a1 ${cloudflare_record.c2-http-a1.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http.ipv4_address}", 
+    "c2 http a2 ${cloudflare_record.c2-http-a2.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http.ipv4_address}", 
 
     "c2 http redirector a1 ${cloudflare_record.c2-http-rdr-a1.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http-rdr.ipv4_address}", 
     "c2 http redirector a2 ${cloudflare_record.c2-http-rdr-a2.name}.${var.domain-c2} - ${digitalocean_droplet.c2-http-rdr.ipv4_address}", 

@@ -1,5 +1,3 @@
-# # DNS configuration
-
 # c2 redirector A #1
 resource "cloudflare_record" "c2-http-rdr-a1" {
     domain = "${var.domain-rdir}"

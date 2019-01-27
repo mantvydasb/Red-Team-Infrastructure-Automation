@@ -8,7 +8,6 @@ resource "digitalocean_droplet" "c2-http-rdr" {
 
   provisioner "remote-exec" {
     inline = [
-        # environment
         "apt update",
         "apt-get -y install socat",
         "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.c2-http.ipv4_address}:80\" >> /etc/cron.d/mdadm",
