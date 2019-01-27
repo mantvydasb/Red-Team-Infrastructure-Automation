@@ -61,8 +61,8 @@ resource "digitalocean_firewall" "operator" {
     ]
 }
 
-resource "digitalocean_firewall" "gophish" {
-    name = "gophish"
+resource "digitalocean_firewall" "phishing" {
+    name = "phishing"
     droplet_ids = ["${digitalocean_droplet.phishing.id}"]
 
     inbound_rule = [
