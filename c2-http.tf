@@ -8,7 +8,6 @@ resource "digitalocean_droplet" "c2-http" {
 
   provisioner "remote-exec" {
     inline = [
-        # environment
         "apt update",
         "apt-get -y install zip default-jre",
         "cd /opt; wget https://github.com/mantvydasb/Offensive-Security-OSCP-Cheatsheets/raw/master/lab/cs.zip -O cobaltstrike.zip",
