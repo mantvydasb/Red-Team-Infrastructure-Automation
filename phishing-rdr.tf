@@ -37,8 +37,7 @@ resource "digitalocean_droplet" "phishing-rdr" {
       "echo *.${var.domain-rdir} >> /etc/opendkim/TrustedHosts",     
       "echo localhost >> /etc/opendkim/TrustedHosts",     
       "echo 127.0.0.1 >> /etc/opendkim/TrustedHosts",     
-      
-      # http relays
+
       "echo \"@reboot root socat TCP4-LISTEN:80,fork TCP4:${digitalocean_droplet.phishing.ipv4_address}:80\" >> /etc/cron.d/mdadm",
       "echo \"@reboot root socat TCP4-LISTEN:443,fork TCP4:${digitalocean_droplet.phishing.ipv4_address}:443\" >> /etc/cron.d/mdadm"
     ]
