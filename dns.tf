@@ -82,7 +82,7 @@ resource "digitalocean_record" "phishing-rdr-mail-spf" {
 resource "digitalocean_record" "phishing-rdr-mail-dkim" {
     domain = "${var.domain-rdir}"
     name   = "mail._domainkey"
-    value  = "I am DKIM, but change with the DKIM from finalize.sh"
+    value  = "I am DKIM, but change me with the DKIM provided by finalize.sh"
     type   = "TXT"
     ttl    = 60
 }
