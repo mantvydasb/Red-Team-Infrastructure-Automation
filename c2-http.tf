@@ -10,7 +10,7 @@ resource "digitalocean_droplet" "c2-http" {
     inline = [
         "apt update",
         "apt-get -y install zip default-jre",
-        "cd /opt; wget https://github.com/mantvydasb/Offensive-Security-OSCP-Cheatsheets/raw/master/lab/cs.zip -O cobaltstrike.zip",
+        "cd /opt; wget ${var.csDownloadUrl} -O cobaltstrike.zip",
         "echo \"@reboot root cd /opt/cobaltstrike/; ./teamserver ${digitalocean_droplet.c2-http.ipv4_address} ${var.cspw}\" >> /etc/cron.d/mdadm",
         "unzip -P ${var.cspw} cobaltstrike.zip && shutdown -r"
     ]

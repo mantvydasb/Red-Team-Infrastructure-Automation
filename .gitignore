@@ -1,2 +1,3 @@
 variables.tf
 *terraform*
+finalize.sh

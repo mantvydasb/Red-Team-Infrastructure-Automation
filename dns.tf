@@ -1,5 +1,5 @@
 # c2 redirector A #1
-resource "cloudflare_record" "c2-http-rdr-a1" {
+resource "digitalocean_record" "c2-http-rdr-a1" {
     domain = "${var.domain-rdir}"
     name   = "${var.sub1}"
     value  = "${digitalocean_droplet.c2-http-rdr.ipv4_address}"
@@ -7,7 +7,7 @@ resource "cloudflare_record" "c2-http-rdr-a1" {
     ttl    = 6020
 }
 # c2 redirector A #2
-resource "cloudflare_record" "c2-http-rdr-a2" {
+resource "digitalocean_record" "c2-http-rdr-a2" {
     domain = "${var.domain-rdir}"
     name   = "${var.sub2}"
     value  = "${digitalocean_droplet.c2-http-rdr.ipv4_address}"
